@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="style.css">
+		<title>Dinner planner in react</title>
+	</head>
+	<body>
+		<div id="app"></div>
+	</body>
+	<script src="js/DinnerModel.js"></script>
+	<!-- new for tw4 / python -m SimpleHTTPServer -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.4/umd/react.development.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.4/umd/react-dom.development.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react-redux/7.1.3/react-redux.js"></script>
+	<script> const h= React.createElement; </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+	<script src="js/app.js" type="text/jsx" data-presets="es2016,react"></script>
+	<script type="text/jsx" data-presets="es2016,react">
+	    ReactDOM.render(
+	     <DinnerPlanner />,
+	    document.body.querySelector("#app"));
+	</script>
+</html>
