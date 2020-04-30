@@ -1,35 +1,42 @@
-const model = new DinnerModel()
+class App extends React.Component {
+  constructor() {
+    super();
 
-// React:
+    const modelString = localStorage.getItem("dinnerModel");
+    if (modelString) {
+      const modelObject = JSON.parse(modelString);
+      this.model = new DinnerModel(modelObject.guests, modelObject.dishes);
+    } else {
+      this.model = new DinnerModel();
+    }
+    this.state = {
+      guests: this.model.getNumberOfGuests(),
+      menu: this.model.getMenu(),
+    };
+  }
 
-const DinnerPlanner=()=>h("div", {},
-	  h("div", {}, 
-      h(Sidebar, {model})),
-		h("div", {}, h(Summary, {model}), h(Search)));
-	
-const Sidebar=({model})=>{                 
-   const num= useObserver("numberOfGuests", model); 
-   return h(NumberPresentational, {num, setNum:n=>model.setNumberOfGuests(n)});};
+  useObserver = (prop, model) => {
+    // a normal function, NOT component!
+    const [value, setValue] = React.useState(model[prop]); // m["k"] === m.k!
+    React.useEffect(() => {
+      const obs = () => setValue(model[prop]);
+      model.addObserver(obs);
+      return () => model.removeObserver(obs);
+    }, [model, prop]);
+    return value;
+  };
 
-const NumberPresentational=({num, setNum})=>{
-    return h("div", null, 
-      h("button", {onClick:e=>setNum(num-1), disabled:num<=1}, "-"),
-      num,
-      h("button", {onClick:e=>setNum(num+1)}, "+"));};
+  updateMenu() {
+    this.state = { menu: this.model.getMenu() };
+  }
 
-const Search=()=>h("div", {}, 
-  h(SearchHeader));
+  componentDidMount = () => {
+    if (!window.location.hash) {
+      window.location.hash = "#search";
+    }
+  };
 
-const SearchHeader=()=>h("div", {}, "Input and search here");
-
-const Summary=({model})=><span>Dinner for {useObserver("numberOfGuests", model)}</span>;
-
-const useObserver=(prop, model)=>{  // a normal function, NOT component!
-   const[value, setValue]= React.useState(model[prop]);  // m["k"] === m.k! 
-   React.useEffect(()=>{
-         const obs= ()=> setValue(model[prop]);
-         model.addObserver(obs);
-         return ()=> model.removeObserver(obs);
-   }, [model, prop]);
-   return value;
-};  
+  render() {
+    return <Router model={this.model} useObserver={this.useObserver} />;
+  }
+}

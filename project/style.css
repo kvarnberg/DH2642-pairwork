@@ -1,29 +1,62 @@
-.debug{
-	font-family: 'Gill Sans';
-    border-style: solid;
-    border-color:lightgray;
-    border-width: 2px; 
-    font-size: 15px;
-    overflow:scroll;
+.debug {
+  font-family: "Gill Sans";
+  border-style: solid;
+  border-color: lightgray;
+  border-width: 2px;
+  font-size: 15px;
+  overflow: scroll;
 }
 
-.flexParent{flex:1; display:flex;  flex-direction: row; height: 100%;}
-
-.sidebar{flex:none; width:150px; overflow:scroll;} 
-
-.mainContent{width: 100%;}
-
-.hide{display:none;}
-
-@media (max-width:20px){  
-    .flexParent{display:flex; 
-        flex-direction:column; } 
+.flexParent {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  height: 100%;
 }
 
-.dishDiv{height:90%; overflow: scroll;}
+.sidebar {
+  flex: none;
+  width: 150px;
+  overflow: scroll;
+}
 
-.spinnerClass{}
+.mainContent {
+  width: 100%;
+}
 
-.dishDisplay{vertical-align:top; text-align:center; display:inline-block; width:200px;}
+.hide {
+  display: none;
+}
 
-.dishDisplay img{display: block; height:100px; margin-left: auto; margin-right: auto;}
+@media (max-width: 20px) {
+  .flexParent {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.dishDiv {
+  height: 90%;
+  overflow: scroll;
+}
+
+.spinnerClass {
+}
+
+.dishDisplay {
+  vertical-align: top;
+  text-align: center;
+  display: inline-block;
+  width: 200px;
+}
+
+.dishDisplay img {
+  display: block;
+  height: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.nav {
+  float: right;
+}
