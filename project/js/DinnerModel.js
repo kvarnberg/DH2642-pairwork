@@ -9,6 +9,15 @@ class DinnerModel {
   setNumberOfGuests(x) {
     this.numberOfGuests = x;
     this.notifyObservers({ guests: x });
+    this.addObserver(() =>
+      localStorage.setItem(
+        "dinnerModel",
+        JSON.stringify({
+          guests: this.numberOfGuests,
+          dishes: this.dishes,
+        })
+      )
+    );
   }
   getNumberOfGuests() {
     return this.numberOfGuests;
@@ -18,7 +27,7 @@ class DinnerModel {
   }
 
   removeObserver(callback) {
-    this.subscribers.filter((i) => i != callback);
+    this.subscribers = this.subscribers.filter((i) => i != callback);
   }
 
   setClicked(dish) {

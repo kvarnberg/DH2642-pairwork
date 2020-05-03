@@ -5,32 +5,31 @@ class Search extends React.Component {
     this.state = {
       textControl: "",
       typeControl: "",
-      load: false,
-      data: [],
     };
 
-    this.setText = this.setText.bind(this);
-    this.setType = this.setType.bind(this);
     this.createDishDisplay = this.createDishDisplay.bind(this);
-    this.getSearch = this.getSearch.bind(this);
   }
 
-  setText(e) {
+  setText = (e) => {
+    e.preventDefault();
     this.setState({ textControl: e.target.value });
-  }
+  };
 
-  setType(e) {
+  setType = (e) => {
+    e.preventDefault();
     this.setState({ typeControl: e.target.value });
-  }
+  };
 
   createDishDisplay(dish) {
     return (
       <span
         className="dishDisplay"
+        key={dish.id}
         id={dish.id}
         title={dish.title}
-        onClick={(event) => {
+        onClick={(e) => {
           this.model.setClicked(dish.id);
+          window.location.hash = "#details";
         }}
       >
         <img src={`https://spoonacular.com/recipeImages/${dish.image}`}></img>
@@ -39,16 +38,18 @@ class Search extends React.Component {
     );
   }
 
-  getSearch = async (e) => {
-    this.setState({ loading: true });
-    e.preventDefault();
-    const results = this.model.searchDishes(
-      this.state.typeControl,
-      this.state.textControl
+  getSearch = () => {
+    return (
+      <RenderPromise
+        promise={this.model.searchDishes(
+          this.state.typeControl,
+          this.state.textControl
+        )}
+        renderData={({ data }) =>
+          data.map((dish) => this.createDishDisplay(dish))
+        }
+      />
     );
-    results.then((obj) => {
-      this.setState({ data: obj });
-    });
   };
 
   render() {
@@ -61,11 +62,7 @@ class Search extends React.Component {
           setType={this.setType}
           getSearch={this.getSearch}
         />
-        {this.state.load ? (
-          <LoadingSpinner />
-        ) : (
-          this.state.data.map((dish) => this.createDishDisplay(dish))
-        )}
+        <span>{this.getSearch()}</span>
       </div>
     );
   }
