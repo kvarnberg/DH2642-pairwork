@@ -96,7 +96,7 @@ class DinnerModel {
     }
   }
 
-  totalPrice(dishes) {
+  totalPrice() {
     let totalPrice = 0;
     this.dishes.map(
       (dish) => (totalPrice = totalPrice + dish.price * this.numberOfGuests)

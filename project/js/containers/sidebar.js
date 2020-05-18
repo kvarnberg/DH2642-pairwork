@@ -6,13 +6,13 @@ const Sidebar = ({ model, useObserver }) => {
     { className: "sidebar debug" },
     h(NumberPresentational, {
       num: num,
-      setNum: (n) => model.setNumberOfGuests(n),
+      model: model,
     }),
     h(SidebarDishes, { dishes: dishes, model: model, num: num })
   );
 };
 
-const NumberPresentational = ({ num, setNum }) => {
+const NumberPresentational = ({ num, model }) => {
   return h(
     "div",
     null,
@@ -20,20 +20,27 @@ const NumberPresentational = ({ num, setNum }) => {
       "button",
       {
         className: "button",
-        onClick: (e) => setNum(num - 1),
+        onClick: (e) => model.setNumberOfGuests(num - 1),
         disabled: num <= 1,
       },
       "-"
     ),
     num,
-    h("button", { className: "button", onClick: (e) => setNum(num + 1) }, "+")
+    h(
+      "button",
+      {
+        className: "button",
+        onClick: (e) => model.setNumberOfGuests(num + 1),
+      },
+      "+"
+    )
   );
 };
 
 const dishDisplay = (dish, model, num) => {
   return h(
     "tr",
-    { id: dish.id },
+    { key: dish.id },
     h("td", {}, dish.title),
     h("td", {}, (dish.price * num).toFixed(2)),
     h(
@@ -64,8 +71,8 @@ const SidebarDishes = ({ dishes, model, num }) => {
           "tr",
           {},
           h("td", {}, "Total:"),
-          h("td", {}, model.totalPrice(dishes) * num),
-          h("td", {}, ":-")
+          h("td", {}, model.totalPrice(dishes).toFixed(2)),
+          h("td", {}, "kr")
         )
       )
     )
