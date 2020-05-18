@@ -3,12 +3,18 @@ class App extends React.Component {
     super();
 
     const modelString = localStorage.getItem("dinnerModel");
+    let modelObject = JSON.parse(modelString);
+    if (modelObject === undefined) {
+      modelObject = {};
+    }
+    this.model = new DinnerModel(modelObject.guests, modelObject.dishes);
+    /* const modelString = localStorage.getItem("dinnerModel");
     if (modelString) {
       const modelObject = JSON.parse(modelString);
       this.model = new DinnerModel(modelObject.guests, modelObject.dishes);
     } else {
       this.model = new DinnerModel();
-    }
+    } */
     this.state = {
       guests: this.model.getNumberOfGuests(),
       menu: this.model.getMenu(),

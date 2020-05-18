@@ -71,7 +71,7 @@ const SidebarDishes = ({ dishes, model, num }) => {
           "tr",
           {},
           h("td", {}, "Total:"),
-          h("td", {}, model.totalPrice(dishes).toFixed(2)),
+          h("td", {}, model.totalPrice(dishes)),
           h("td", {}, "kr")
         )
       )

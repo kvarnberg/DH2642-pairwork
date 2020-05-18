@@ -11,11 +11,11 @@ const Details = ({ model, useObserver }) => {
     >
       Go back
     </button>,
-    h(RenderGroups, { model: model, id: clicked, useObserver: useObserver })
+    h(Rendering, { model: model, id: clicked, useObserver: useObserver })
   );
 };
 
-const RenderGroups = ({ model, id, useObserver }) =>
+const Rendering = ({ model, id, useObserver }) =>
   h(renderPromise, {
     promise: model.getDishDetails(id),
     model: model,

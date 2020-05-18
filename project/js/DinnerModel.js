@@ -1,5 +1,5 @@
 class DinnerModel {
-  constructor(guests = 1, dishes = []) {
+  constructor(guests = 2, dishes = []) {
     this.numberOfGuests = guests;
     this.subscribers = [];
     this.dishes = dishes;

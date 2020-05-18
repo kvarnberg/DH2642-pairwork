@@ -6,19 +6,14 @@ class Search extends React.Component {
       textControl: "",
       typeControl: "",
     };
-
-    this.createDishDisplay = this.createDishDisplay.bind(this);
   }
 
-  setText = (e) => {
-    e.preventDefault();
-    this.setState({ textControl: e.target.value });
-  };
-
-  setType = (e) => {
-    e.preventDefault();
-    this.setState({ typeControl: e.target.value });
-  };
+  update() {
+    this.setState({
+      textControl: document.getElementById("textControl").value,
+      typeControl: document.getElementById("typeControl").value,
+    });
+  }
 
   createDishDisplay(dish) {
     return (
@@ -56,13 +51,19 @@ class Search extends React.Component {
     return (
       <div>
         <SummaryShow />
-        <Form
-          typeControl={this.state.typeControl}
-          setText={this.setText}
-          setType={this.setType}
-          getSearch={this.getSearch}
-        />
-        <span>{this.getSearch()}</span>
+        <div>
+          <input id="textControl" />
+          <select id="typeControl">
+            <option value="">Choose type:</option>
+            {["starter", "main course", "dessert"].map((opt) =>
+              h("option", { value: opt, key: opt }, opt)
+            )}
+          </select>
+          <button onClick={() => this.update()}>Search</button>
+        </div>
+        <div>
+          <span>{this.getSearch()}</span>
+        </div>
       </div>
     );
   }
