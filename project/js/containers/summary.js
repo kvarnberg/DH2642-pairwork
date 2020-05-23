@@ -91,3 +91,5 @@ const Menu = ({ dishes, guests, model }) => {
     )
   );
 };
+
+// insert explanations later, for table and such
