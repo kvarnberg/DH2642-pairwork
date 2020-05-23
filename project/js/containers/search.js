@@ -50,9 +50,13 @@ class Search extends React.Component {
   render() {
     return (
       <div>
-        <SummaryShow />
+        <p className="fancytext">Dinner planner</p>
         <div>
-          <input id="textControl" />
+          <input
+            className="input"
+            placeholder="Search term..."
+            id="textControl"
+          />
           <select id="typeControl">
             <option value="">Choose type:</option>
             {["starter", "main course", "dessert"].map((opt) =>
@@ -64,6 +68,7 @@ class Search extends React.Component {
         <div>
           <span>{this.getSearch()}</span>
         </div>
+        <SummaryShow />
       </div>
     );
   }

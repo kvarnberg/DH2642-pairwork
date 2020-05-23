@@ -1,7 +1,7 @@
 const SummaryShow = () => {
   return (
     <button
-      className="nav button"
+      className="summarybutton"
       onClick={(e) => (window.location.hash = "#summary")}
     >
       Show summary

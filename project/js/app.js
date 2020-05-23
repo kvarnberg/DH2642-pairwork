@@ -2,19 +2,22 @@ class App extends React.Component {
   constructor() {
     super();
 
-    const modelString = localStorage.getItem("dinnerModel");
+    /*const modelString = localStorage.getItem("dinnerModel");
     let modelObject = JSON.parse(modelString);
     if (modelObject === undefined) {
       modelObject = {};
     }
-    this.model = new DinnerModel(modelObject.guests, modelObject.dishes);
-    /* const modelString = localStorage.getItem("dinnerModel");
+    this.model = new DinnerModel(modelObject.guests, modelObject.dishes);*/
+    const modelString = localStorage.getItem("dinnerModel");
     if (modelString) {
+      console.log("modelstring exists");
       const modelObject = JSON.parse(modelString);
-      this.model = new DinnerModel(modelObject.guests, modelObject.dishes);
-    } else {
-      this.model = new DinnerModel();
-    } */
+      if (modelObject) {
+        this.model = new DinnerModel(modelObject.guests, modelObject.dishes);
+      } else {
+        this.model = new DinnerModel();
+      }
+    }
     this.state = {
       guests: this.model.getNumberOfGuests(),
       menu: this.model.getMenu(),

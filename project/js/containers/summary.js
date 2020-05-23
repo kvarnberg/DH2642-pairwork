@@ -12,9 +12,10 @@ const Summary = ({ model, useObserver }) => {
         className: "nav",
         onClick: (e) => (window.location.hash = "#search"),
       },
-      "Search"
+      "Go back"
     ),
     h("div", { className: "fancytext" }, `Dinner for ${guests} people`),
+    h("h3", {}, "Shopping list: "),
     h(Ingredients, { ingredients: ingredients, model: model }),
     h(Menu, {
       dishes: dishes,
@@ -66,7 +67,7 @@ const Menu = ({ dishes, guests, model }) => {
     "div",
     {},
     h("h3", {}, `TOTAL: ${model.totalPrice()}kr`),
-    h("h3", {}, "Menu"),
+    h("h3", {}, "Menu:"),
     h(
       "div",
       {},

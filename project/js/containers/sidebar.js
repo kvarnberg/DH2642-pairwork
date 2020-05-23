@@ -16,6 +16,7 @@ const NumberPresentational = ({ num, model }) => {
   return h(
     "div",
     null,
+    h("p", {}, "Guests: "),
     h(
       "button",
       {
@@ -59,6 +60,7 @@ const SidebarDishes = ({ dishes, model, num }) => {
   return h(
     "div",
     {},
+    h("p", {}, "Dishes: "),
     h(
       "table",
       {},

@@ -5,10 +5,7 @@ const Details = ({ model, useObserver }) => {
   return h(
     "div",
     {},
-    <button
-      className="nav button"
-      onClick={(e) => (window.location.hash = "#search")}
-    >
+    <button className="nav" onClick={(e) => (window.location.hash = "#search")}>
       Go back
     </button>,
     h(Rendering, { model: model, id: clicked, useObserver: useObserver })
@@ -57,7 +54,7 @@ const DishDetails = ({ model, dish, useObserver }) => {
       "Price for " +
         guests +
         " guest(s): " +
-        model.getPrice(dish) * guests +
+        (model.getPrice(dish) * guests).toFixed(2) +
         ":-"
     ),
     h(
@@ -96,7 +93,7 @@ const DishDetails = ({ model, dish, useObserver }) => {
           dish.extendedIngredients.map((ingredient) => {
             return h(
               "tr",
-              { key: ingredient.name },
+              {},
               h("td", { className: "text" }, ingredient.name),
               h("td", { className: "text" }, ingredient.amount * guests)
             );
