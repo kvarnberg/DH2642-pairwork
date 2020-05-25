@@ -2,7 +2,10 @@ const Router = ({ model, useObserver }) => {
   const [router, setRouter] = React.useState(window.location.hash);
 
   React.useEffect(() => {
-    window.onhashchange = () => setRouter(window.location.hash);
+    const listener = () => setRouter(window.location.hash);
+    window.addEventListener("hashchange", listener);
+    return () => window.removeEventListener("hashchange", listener);
+    // window.onhashchange = () => setRouter(window.location.hash);
   }, []);
 
   return h(

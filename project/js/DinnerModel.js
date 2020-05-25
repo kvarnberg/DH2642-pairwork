@@ -1,5 +1,5 @@
 class DinnerModel {
-  constructor(guests = 2, dishes = []) {
+  constructor(guests = 1, dishes = []) {
     this.numberOfGuests = guests;
     this.subscribers = [];
     this.dishes = dishes;
@@ -91,6 +91,12 @@ class DinnerModel {
           return 0;
         }
       });
+      this.addObserver(() =>
+        localStorage.setItem(
+          "dinnerModel",
+          JSON.stringify({ guests: this.numberOfGuests, dishes: this.dishes })
+        )
+      );
     } else {
       alert("Dish already in menu.");
     }
@@ -165,9 +171,7 @@ class DinnerModel {
   }
 
   remove(dish) {
-    this.dishes = this.dishes.filter(function (obj) {
-      return obj.id !== dish.id;
-    });
+    this.dishes = this.dishes.filter((obj) => obj.id != dish.id);
     this.notifyObservers({ remove_dish: dish });
   }
 }

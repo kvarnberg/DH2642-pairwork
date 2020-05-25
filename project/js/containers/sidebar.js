@@ -6,35 +6,20 @@ const Sidebar = ({ model, useObserver }) => {
     { className: "sidebar debug" },
     h(NumberPresentational, {
       num: num,
-      model: model,
+      setNum: React.useCallback((x) => model.setNumberOfGuests(x), [model]),
     }),
     h(SidebarDishes, { dishes: dishes, model: model, num: num })
   );
 };
 
-const NumberPresentational = ({ num, model }) => {
+const NumberPresentational = ({ num, setNum }) => {
   return h(
     "div",
     null,
     h("p", {}, "Guests: "),
-    h(
-      "button",
-      {
-        className: "button",
-        onClick: (e) => model.setNumberOfGuests(num - 1),
-        disabled: num <= 1,
-      },
-      "-"
-    ),
+    h("button", { onClick: (e) => setNum(num - 1), disabled: num <= 1 }, "-"),
     num,
-    h(
-      "button",
-      {
-        className: "button",
-        onClick: (e) => model.setNumberOfGuests(num + 1),
-      },
-      "+"
-    )
+    h("button", { onClick: (e) => setNum(num + 1) }, "+")
   );
 };
 
@@ -60,7 +45,7 @@ const SidebarDishes = ({ dishes, model, num }) => {
   return h(
     "div",
     {},
-    h("p", {}, "Dishes: "),
+    h("p", {}, "Menu: "),
     h(
       "table",
       {},
@@ -68,7 +53,7 @@ const SidebarDishes = ({ dishes, model, num }) => {
       h(
         "tbody",
         {},
-        dishes.map((dish) => dishDisplay(dish, model, num)),
+        model.getMenu().map((dish) => dishDisplay(dish, model, num)),
         h(
           "tr",
           {},

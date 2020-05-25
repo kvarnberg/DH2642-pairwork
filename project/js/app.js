@@ -2,13 +2,19 @@ class App extends React.Component {
   constructor() {
     super();
 
-    /*const modelString = localStorage.getItem("dinnerModel");
-    let modelObject = JSON.parse(modelString);
-    if (modelObject === undefined) {
+    const modelString = localStorage.getItem("dinnerModel");
+    var modelObject = JSON.parse(modelString);
+    if (!modelObject) {
       modelObject = {};
     }
-    this.model = new DinnerModel(modelObject.guests, modelObject.dishes);*/
-    const modelString = localStorage.getItem("dinnerModel");
+    console.log(modelObject);
+    this.model = new DinnerModel(modelObject.guests, modelObject.dishes);
+    this.state = {
+      guests: this.model.getNumberOfGuests(),
+      menu: this.model.getMenu(),
+    };
+
+    /*const modelString = localStorage.getItem("dinnerModel");
     if (modelString) {
       console.log("modelstring exists");
       const modelObject = JSON.parse(modelString);
@@ -21,7 +27,7 @@ class App extends React.Component {
     this.state = {
       guests: this.model.getNumberOfGuests(),
       menu: this.model.getMenu(),
-    };
+    };*/
   }
 
   useObserver = (prop, model) => {
@@ -36,7 +42,7 @@ class App extends React.Component {
   };
 
   updateMenu() {
-    this.state = { menu: this.model.getMenu() };
+    this.setState = { menu: this.model.getMenu() };
   }
 
   componentDidMount = () => {
